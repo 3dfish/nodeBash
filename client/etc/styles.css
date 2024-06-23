@@ -26,14 +26,14 @@ body, html {
     font-size: 2em; /* Increased font size */
     border: none;
     border-radius: 10px; /* More rounded corners */
-    background: linear-gradient(45deg, #1e90ff, #00ff7f); /* Gradient background */
-    color: white;
+    background: #000; /* Normal state background color */
+    color: #fff; /* Normal state text color */
     cursor: pointer;
     outline: none;
     position: relative;
     overflow: hidden;
     z-index: 0;
-    transition: color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn::before {
@@ -57,7 +57,8 @@ body, html {
 }
 
 .btn:hover {
-    color: #000;
+    background: linear-gradient(45deg, #1e90ff, #00ff7f); /* Hover state background color */
+    color: #000; /* Hover state text color */
 }
 
 @media (min-width: 600px) {

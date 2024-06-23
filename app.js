@@ -26,6 +26,21 @@ app.get('/factorio/start',function(req,res){
 		return;
 	  }
 	  console.log(`stdout: ${stdout}`);
+	  res.json({ message: '服务器启动成功' });
+	});
+});
+app.get('/factorio/stop',function(req,res){
+	exec('sudo systemctl stop factorio.service', (error, stdout, stderr) => {
+	  if (error) {
+		console.error(`执行出错: ${error}`);
+		return;
+	  }
+	  if (stderr) {
+		console.error(`stderr: ${stderr}`);
+		return;
+	  }
+	  console.log(`stdout: ${stdout}`);
+	  res.json({ message: '服务器停止' });
 	});
 });
 

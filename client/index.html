@@ -8,8 +8,30 @@
 </head>
 <body>
     <div class="container">
-        <button class="btn">Button 1</button>
-        <button class="btn">Button 2</button>
+        <button class="btn" id="button1">启动异星工场服务器</button>
+        <button class="btn" id="button2">停止异星工场服务器</button>
     </div>
+	<script>
+		document.getElementById('button1').addEventListener('click', () => {
+			sendGetRequest('/factorio/start');
+		});
+
+		document.getElementById('button2').addEventListener('click', () => {
+			sendGetRequest('/factorio/stop');
+		});
+
+		function sendGetRequest(url) {
+			fetch(url)
+				.then(response => response.json())
+				.then(data => {
+					console.log('Success:', data.message);
+					alert(`Success: ${data.message}`);
+				})
+				.catch((error) => {
+					console.error('Error:', error);
+					alert(`Error: ${error}`);
+				});
+		}
+	</script>
 </body>
 </html>
