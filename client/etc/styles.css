@@ -1,0 +1,72 @@
+/* Reset some default styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background: #333; /* Dark background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.btn {
+    width: 80%;
+    max-width: 400px; /* Increased max width */
+    padding: 30px; /* Increased padding */
+    margin: 20px; /* Increased margin */
+    font-size: 2em; /* Increased font size */
+    border: none;
+    border-radius: 10px; /* More rounded corners */
+    background: linear-gradient(45deg, #1e90ff, #00ff7f); /* Gradient background */
+    color: white;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+    transition: color 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0) 70%);
+    transition: width 0.3s ease, height 0.3s ease, top 0.3s ease, left 0.3s ease;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 400%;
+    height: 400%;
+    top: 50%;
+    left: 50%;
+}
+
+.btn:hover {
+    color: #000;
+}
+
+@media (min-width: 600px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .btn {
+        width: 40%;
+        margin: 20px;
+    }
+}
