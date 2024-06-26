@@ -13,8 +13,12 @@ const httpsOption = {
 servs = require('https').createServer(httpsOption,app);
 
 app.get('/factorio',function(req,res){
-	res.sendFile(__dirname + '/client/index.html');/////////////////////////////
+	res.sendFile(__dirname + '/client/factorio.html');/////////////////////////////
 });
+app.get('/pal',function(req,res){
+	res.sendFile(__dirname + '/client/pal.html');/////////////////////////////
+});
+
 app.get('/factorio/start',function(req,res){
 	exec('sudo systemctl start factorio.service', (error, stdout, stderr) => {
 	  if (error) {
@@ -31,6 +35,34 @@ app.get('/factorio/start',function(req,res){
 });
 app.get('/factorio/stop',function(req,res){
 	exec('sudo systemctl stop factorio.service', (error, stdout, stderr) => {
+	  if (error) {
+		console.error(`执行出错: ${error}`);
+		return;
+	  }
+	  if (stderr) {
+		console.error(`stderr: ${stderr}`);
+		return;
+	  }
+	  console.log(`stdout: ${stdout}`);
+	  res.json({ message: '服务器停止' });
+	});
+});
+app.get('/pal/start',function(req,res){
+	exec('sudo systemctl start pal.service', (error, stdout, stderr) => {
+	  if (error) {
+		console.error(`执行出错: ${error}`);
+		return;
+	  }
+	  if (stderr) {
+		console.error(`stderr: ${stderr}`);
+		return;
+	  }
+	  console.log(`stdout: ${stdout}`);
+	  res.json({ message: '服务器启动成功' });
+	});
+});
+app.get('/pal/stop',function(req,res){
+	exec('sudo systemctl stop pal.service', (error, stdout, stderr) => {
 	  if (error) {
 		console.error(`执行出错: ${error}`);
 		return;
